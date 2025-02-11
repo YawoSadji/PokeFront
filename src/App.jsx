@@ -18,27 +18,32 @@ function App() {
 
   
   return(
-    <>
-    <div>
-      <h1>
-        PokeFront
-        <Badge bg="secondary" as={Button}>
-          All Pokemon
-        </Badge>
-      </h1>
+    <div className="container">
+      <div>
+        <div>
+        <h1>
+          PokeFront
+          <Badge bg="secondary" as={Button}>
+            All Pokemon
+          </Badge>
+        </h1>
+      </div>
+      <div className="row">
+        {loading?(
+          <Carousel.Item> 
+            <div>Loading...</div>
+          </Carousel.Item>
+          ):(pokemons.map((pokemon, index) => (
+          <div key={index} className="col-md-3">
+            <div className="card">
+            <h5 className="card-titile">{pokemon.name}</h5>
+            <p className="card-text">URL: {pokemon.url}</p>
+          </div>
+          </div>))
+        )}
     </div>
-    <Carousel>
-      {loading?(
-        <Carousel.Item> 
-          <div>Loading...</div>
-        </Carousel.Item>
-        ):(pokemons.map((pokemon, index) => (
-        <Carousel.Item key={index}>
-          <h3>{pokemon.name}</h3>
-          <p>URL: {pokemon.url}</p>
-        </Carousel.Item>)))}
-  </Carousel>
-  </>
+    </div>
+    </div>
   );
 }
 
