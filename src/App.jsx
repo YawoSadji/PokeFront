@@ -9,6 +9,9 @@ function App() {
   const handleAddToSquad = (pokemon) => {
     console.log("Button Clicked"); {/*logging for now, will add logic later */}
   };
+  const handleRemoveFromSquad = (pokemon) => {
+    console.log("Button Clicked"); {/*logging for now, will add logic later */}
+  };
   useEffect(() => {
     fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
     .then(response => response.json())
@@ -41,7 +44,8 @@ function App() {
             <div className="card">
             <h5 className="card-titile">{pokemon.name}</h5>
             {/* <p className="card-text">URL: {pokemon.url}</p> */}
-            <button className="btn btn-primary" onClick={handleAddToSquad(pokemon)}>Add</button>
+            <button className="btn btn-success" onClick={handleAddToSquad(pokemon)}>Add</button>
+            <button className="btn btn-danger" onClick={handleRemoveFromSquad(pokemon)}>Remove</button>
           </div>
           </div>))
         )}
