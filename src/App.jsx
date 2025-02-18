@@ -6,8 +6,8 @@ import Button from 'react-bootstrap/Button';
 function App() {
   const [pokemons, setPokemons]= useState([]);
   const [loading, setLoading]= useState(true);
-  const handleAddClick = () => {
-    console.log("Button Clicked"); 
+  const handleAddToSquad = (pokemon) => {
+    console.log("Button Clicked"); {/*logging for now, will add logic later */}
   };
   useEffect(() => {
     fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
@@ -41,7 +41,7 @@ function App() {
             <div className="card">
             <h5 className="card-titile">{pokemon.name}</h5>
             {/* <p className="card-text">URL: {pokemon.url}</p> */}
-            <button onClick={handleAddClick}>Add</button>
+            <button className="btn btn-primary" onClick={handleAddToSquad(pokemon)}>Add</button>
           </div>
           </div>))
         )}
