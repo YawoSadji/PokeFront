@@ -31,13 +31,13 @@ function App() {
     })
     .catch(error => console.error(error));
   }, []);
-
+  const handleAddToSquad = ()
+  const handleRemoveFromSquad = ()
+  const isBattleButtonEnabled = state.squad.length >=2;
   
   return(
     <div className="container">
-      {state}
       <div>
-        <div>
         <h1>
           PokeFront
           <Badge bg="secondary" as={Button}>
@@ -54,12 +54,25 @@ function App() {
           <div key={index} className="col-md-3">
             <div className="card">
             <h5 className="card-titile">{pokemon.name}</h5>
-            <button className="btn btn-success" onClick={(pokemon)=>dispatch({type:"add", payload: pokemon.index})}>Add</button>
-            <button className="btn btn-danger" onClick={(pokemon)=>dispatch({type: "remove", payload: pokemon.index})}>Remove</button>
+            {state.squad.includes(pokemon.name)?
+            (
+              <button className="btn btn-danger" onClick={()=>handleRemoveFromSquad(pokemon.name)}>Remove from Squad</button>
+            ):(
+              <button className="btn btn-success" onClick={()=>handleAddToSquad(pokemon.name)}>Add To Squad</button>
+            )
+          }
           </div>
           </div>))
         )}
     </div>
+    <div>
+      <h2>Squad Members:</h2>
+      <ul>
+        {state.squad.map((pokemon, index)=>(
+          <li key={index}>{pokemon}</li>
+        ))}
+      </ul>
+      <button className="btn btn-primary" disabled={!isBattleButtonEnabled}>Battle</button>
     </div>
     </div>
   );
