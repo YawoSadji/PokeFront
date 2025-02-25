@@ -1,17 +1,35 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import Carousel from 'react-bootstrap/Carousel';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
+const initialState = { squad: [], }
+const reducer = (state, action)=>{
+  switch (action.type){
+    case 'add':
+      if(!state.squad.includes(action.payload)){
+        return { ...state, squad: [...state.squad, action.payload]}
+      }
+      return state;
+    case 'remove':
+    default:
+      return state;
+  }
+};
 
 function App() {
-  const [pokemons, setPokemons]= useState([]);
+  const [pokemons, setPokemons] = useState([]);
+  const [state, dispatch]= useReducer(reducer, []);
   const [loading, setLoading]= useState(true);
-  const handleAddToSquad = (pokemon) => {
-    console.log("Button Clicked"); {/*logging for now, will add logic later */}
-  };
-  const handleRemoveFromSquad = (pokemon) => {
-    console.log("Button Clicked"); {/*logging for now, will add logic later */}
-  };
+  function reducer(state, action, pokemon){
+    if(action.type == "add"){
+      state.push(pokemon);
+      console.log(state);
+    }
+    if(action.type == "remove"){
+      return state.push(pokemon);
+    }
+  }
+
   useEffect(() => {
     fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
     .then(response => response.json())
@@ -25,6 +43,7 @@ function App() {
   
   return(
     <div className="container">
+      {state}
       <div>
         <div>
         <h1>
@@ -43,9 +62,8 @@ function App() {
           <div key={index} className="col-md-3">
             <div className="card">
             <h5 className="card-titile">{pokemon.name}</h5>
-            {/* <p className="card-text">URL: {pokemon.url}</p> */}
-            <button className="btn btn-success" onClick={handleAddToSquad(pokemon)}>Add</button>
-            <button className="btn btn-danger" onClick={handleRemoveFromSquad(pokemon)}>Remove</button>
+            <button className="btn btn-success" onClick={(pokemon)=>dispatch({type:"add", payload: pokemon.index})}>Add</button>
+            <button className="btn btn-danger" onClick={(pokemon)=>dispatch({type: "remove", payload: pokemon.index})}>Remove</button>
           </div>
           </div>))
         )}
