@@ -7,10 +7,11 @@ const reducer = (state, action)=>{
   switch (action.type){
     case 'add':
       if(!state.squad.includes(action.payload)){
-        return { ...state, squad: [...state.squad, action.payload]}
+        return {...state, squad: [...state.squad, action.payload]}
       }
       return state;
     case 'remove':
+      return{...state, squad: state.squad.filter((item)=>item !== action.payload), }
     default:
       return state;
   }
@@ -18,17 +19,8 @@ const reducer = (state, action)=>{
 
 function App() {
   const [pokemons, setPokemons] = useState([]);
-  const [state, dispatch]= useReducer(reducer, []);
+  const [state, dispatch]= useReducer(reducer, initialState);
   const [loading, setLoading]= useState(true);
-  function reducer(state, action, pokemon){
-    if(action.type == "add"){
-      state.push(pokemon);
-      console.log(state);
-    }
-    if(action.type == "remove"){
-      return state.push(pokemon);
-    }
-  }
 
   useEffect(() => {
     fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
