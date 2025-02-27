@@ -61,8 +61,8 @@ function App() {
             <li key={index}>{pokemon}</li>
           ))}
         </ul>
-        <button className="btn btn-primary" disabled={!isBattleButtonEnabled}>
-          Battle
+        <button className="btn btn-secondary" disabled={!isBattleButtonEnabled}>
+          Start Battle
         </button>
       </div>
       <div className="row">
