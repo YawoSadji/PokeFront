@@ -61,9 +61,9 @@ function App() {
             <li key={index}>{pokemon}</li>
           ))}
         </ul>
-        <button className="btn btn-secondary" disabled={!isBattleButtonEnabled}>
+        <Button variant="primary" size="sm " disabled={!isBattleButtonEnabled}>
           Start Battle
-        </button>
+        </Button>
       </div>
       <div className="row">
         {loading ? (
@@ -76,19 +76,19 @@ function App() {
               <div className="card">
                 <h5 className="card-titile">{pokemon.name}</h5>
                 {state.squad.includes(pokemon.name) ? (
-                  <button
-                    className="btn btn-danger"
+                  <Button
+                    variant="danger"
                     onClick={() => handleRemoveFromSquad(pokemon.name)}
                   >
                     Remove from Squad
-                  </button>
+                  </Button>
                 ) : (
-                  <button
-                    className="btn btn-success"
+                  <Button
+                    variant="success"
                     onClick={() => handleAddToSquad(pokemon.name)}
                   >
                     Add To Squad
-                  </button>
+                  </Button>
                 )}
               </div>
             </div>
