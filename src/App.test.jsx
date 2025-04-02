@@ -11,6 +11,5 @@ import App from "./App";
 
 test("App should render", () => {
   render(<App />);
-
   expect(screen.getByText("PokeFront")).toBeInTheDocument();
 });
